@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('ranges', function(table) {
       table.increments('id').primary();
       table.string('name');
-      table.string('#_of_tallest_peaks');
+      table.string('tallest_peaks');
 
       table.timestamps(true, true);
     }),
