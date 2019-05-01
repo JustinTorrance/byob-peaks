@@ -1,4 +1,4 @@
-const ranges = [
+const rangesData = [
   {
     "name": "St Elias Mountains",
     "tallest_peaks": "19"
@@ -68,5 +68,4 @@ const mountains = [
   }
 ]
 
-module.exports = ranges
-module.exports = mountains
+module.exports = rangesData
