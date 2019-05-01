@@ -40,3 +40,30 @@ const ranges = [
     "#_of_tallest_peaks": "23"
   }
 ]
+
+const mountains = [
+  {
+    "name": "Denali",
+    "elevation": "20,320"
+  },
+  {
+    "name": "Mt Logan",
+    "elevation": "19,541"
+  },
+  {
+    "name": "Pico de Orizaba",
+    "elevation": "18,491"
+  },
+  {
+    "name": "Mt St Elias",
+    "elevation": "18,008"
+  },
+  {
+    "name": "Volcan Popocatepetl",
+    "elevation": "17,717"
+  },
+  {
+    "name": "Mt Whitney",
+    "elevation": "14,495"
+  }
+]
