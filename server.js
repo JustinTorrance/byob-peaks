@@ -15,7 +15,7 @@ app.get('/api/v1/peaks', (request, response) => {
     });
 });
 
-app.set('port', 3001);
+app.set('port', process.env.PORT || 3000).
 
 app.listen(app.get('port'), () => {
   console.log(`App is now running at http://localhost:${app.get('port')}`);
