@@ -1,27 +1,46 @@
-const mountains = require('../rangesData')
-const ranges = require('../rangesData')
+const rangesData = require('../rangesData')
+
+const createRanges = (knex, ranges) => {
+  return knex("ranges")
+    .insert(
+      {
+        name: ranges.name,
+        tallest_peaks: ranges.tallest_peaks,
+      },
+      'id'
+    )
+    .then(range_id => {
+      let rangesPromises = []
+
+      ranges.mountains.forEach(mountain => {
+        rangesPromises.push(
+          createRanges(knex, {
+            name: mountain.name,
+            elevation: mountain.elevation,
+            rank: mountain.rank,
+            range_id: range_id[0]
+          })
+        )
+      })
+      return Promise.all(rangesPromises)
+    })
+}
+
+const createMountain = (knex, mountains) => {
+  return knex("mountains").insert(mountains)
+}
 
 exports.seed = function(knex, Promise) {
-  return knex('mountains').del() 
+  return knex('mountains')
+    .del() 
     .then(() => knex('ranges').del()) 
-
     .then(() => {
-      return Promise.all([
-        
-        knex('ranges').insert({
-          name: 'St Elias Mountains', tallest_peaks: '19'
-        }, 'id')
-        .then(ranges => {
-          return knex('mountains').insert([
-            //link range_id with Alaska Range id
-            { name: 'Denali', range_id: ranges[8], elevation: '20,000' },
-            //link range_id with st elias mountains range id
-            { name: 'Mt Logan', range_id: ranges[0], elevation: '20,000' }
-          ])
-        })
-        .then(() => console.log('Seeding complete!'))
-        .catch(error => console.log(`Error seeding data: ${error}`))
-      ])
+      let rangesPromises = []
+      rangesData.forEach(range => {
+        rangesPromises.push(createRanges(knex, range))
+      })
+
+      return Promise.all(rangesPromises)
     })
     .catch(error => console.log(`Error seeding data: ${error}`));
 };
