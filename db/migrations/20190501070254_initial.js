@@ -4,16 +4,15 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary();
       table.string('name');
       table.string('tallest_peaks');
-
       table.timestamps(true, true);
     }),
 
     knex.schema.createTable('mountains', function(table) {
       table.increments('id').primary();
       table.string('name');
-      table.integer('elevation')
-      table.integer('ranges_id').unsigned()
-      table.foreign('ranges_id')
+      table.string('elevation')
+      table.integer('range_id').unsigned()
+      table.foreign('range_id')
         .references('ranges.id');
 
       table.timestamps(true, true);
