@@ -11,7 +11,6 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary();
       table.string('name');
       table.integer('elevation')
-      table.integer('rank')
       table.integer('range_id').unsigned()
       table.foreign('range_id')
         .references('ranges.id');

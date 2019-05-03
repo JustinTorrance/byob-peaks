@@ -1,4 +1,4 @@
-const ranges = [
+const data = [
   {
     name: "St Elias Mountains",
     tallest_peaks: 14,
@@ -21,7 +21,7 @@ const ranges = [
       {
         name: "King Peak",
         elevation: 16972,
-        rank: 2
+        rank: 8
       },
       {
         name: "Mt Bona",
@@ -162,5 +162,4 @@ const ranges = [
   }
 ]
 
-
-module.exports = ranges
+module.exports = data
