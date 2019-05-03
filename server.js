@@ -5,6 +5,8 @@ const database = require('knex')(configuration);
 const express = require('express');
 const app = express();
 
+app.set('port', process.env.PORT || 3000)
+
 app.get('/api/v1/peaks', (request, response) => {
   database('ranges').select()
     .then((ranges) => {
@@ -15,7 +17,6 @@ app.get('/api/v1/peaks', (request, response) => {
     });
 });
 
-app.set('port', process.env.PORT || 3000).
 
 app.listen(app.get('port'), () => {
   console.log(`App is now running at http://localhost:${app.get('port')}`);
