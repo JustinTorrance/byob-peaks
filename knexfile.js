@@ -1,48 +1,13 @@
-// Update with your config settings.
-
 module.exports = {
-
   development: {
     client: 'pg',
-    connection: {
-      filename: 'postgres://localhost/peaks',
-      migrations: {
-        directory: './db/migrations'
-      },
-      useNullAsDefault: true
-    }
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: 'postgres://localhost/peaks',
     migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      directory: './db/migrations'
     },
-    pool: {
-      min: 2,
-      max: 10
+    seeds: {
+      directory: './db/seeds'
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+    useNullAsDefault: true
   }
-
 };
