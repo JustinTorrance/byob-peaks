@@ -17,6 +17,7 @@ const createRanges = (knex, range) => {
           createMountain(knex, {
             name: mountain.name,
             elevation: mountain.elevation,
+            rank: mountain.rank,
             range_id: range_id[0]
           })
         )
