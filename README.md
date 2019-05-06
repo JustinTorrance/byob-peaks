@@ -105,4 +105,30 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
     "rank": 7
   }
  ```  
+   
+   
+ 
+  **Add new range:** `POST /api/v1/ranges`
+  
+  **Parameters:**
+  
+| Name                 | Type          |
+| -------------        |:-------------:|
+| `name`               | `string`      |
+| `tallest_peaks`      | `number`      |
+  
+ - Response status: 201
+ - Response example:
+ 
+ ```
+    {
+    "id": 3,
+    "name": "Mt Lucania",
+    "elevation": 17192,
+    "range_id": 1,
+    "created_at": "2019-05-03T16:12:40.338Z",
+    "updated_at": "2019-05-03T16:12:40.338Z",
+    "rank": 7
+  }
+ ```
  
