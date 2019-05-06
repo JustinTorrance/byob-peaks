@@ -55,7 +55,7 @@ app.get("/api/v1/mountains/:id", (request, response) => {
   database("mountains")
     .where("id", request.params.id).select()
     .then(mountain => {
-      if (mountain.length) {
+      if (mountain) {
         response.status(200).json(mountain)
       } else {
         response.status(404).json({
