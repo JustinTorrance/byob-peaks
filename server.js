@@ -10,10 +10,10 @@ app.set('port', process.env.PORT || 3000)
 app.get('/api/v1/ranges', (request, response) => {
   database('ranges').select()
     .then((range) => {
-      response.status(200).json(range);
+      response.status(200).json(range)
     })
     .catch((error) => {
-      response.status(500).json({ error });
+      response.status(500).json({ error })
     });
 });
 
@@ -22,19 +22,19 @@ app.get("/api/v1/ranges/:id", (request, response) => {
     .where("id", request.params.id)
     .select()
     .then(range => {
-      response.status(200).json(range);
+      response.status(200).json(range)
       if (range) {
-        response.status(200).json(range);
+        response.status(200).json(range)
       } else {
         response.status(404).json({
           error: `That range does not exist.`
-        });
+        })
       }
     })
     .catch(error => {
-      response.status(500).json({ error });
-    });
-});
+      response.status(500).json({ error })
+    })
+})
 
 app.get('/api/v1/ranges/:id/mountains', (request, response) => {
   database('mountains').where('range_id', request.params.id).select()
@@ -57,22 +57,22 @@ app.get("/api/v1/mountains/:id", (request, response) => {
     .where("id", request.params.id)
     .select()
     .then(mountain => {
-      response.status(200).json(mountain);
+      response.status(200).json(mountain)
       if (mountain.length) {
-        response.status(200).json(mountain);
+        response.status(200).json(mountain)
       } else {
         response.status(404).json({
           error: `That mountain does not exist`
-        });
+        })
       }
     })
     .catch(error => {
       response.status(500).json({ error });
-    });
-});
+    })
+})
 
 app.post('/api/v1/ranges', (request, response) => {
-  const range = request.body;
+  const range = request.body
   for (let requiredParameter of ['name', 'tallest_peaks']) {
     if(!range[requiredParameter]) {
       response.status(422).json({ 
@@ -88,6 +88,25 @@ app.post('/api/v1/ranges', (request, response) => {
     })
     .catch(error => {
       response.status(500).json({ error });
+    })
+})
+
+app.post('/api/v1/ranges/:id/mountains', (request, response) => {
+  const mountain = request.body
+  const rangeID = request.params.id
+  for (let requiredParameter of ['name', 'elevation', 'rank']) {
+    if(!mountain[requiredParameter]){
+      response.status(422).json({ 
+        error: `Expected format: { name: <String>, elevation: <Integer>, rank: <Integer> } You're missing the ${requiredParameter}.` })
+    }
+  }
+  database('mountains')
+    .insert({ ...mountain, range_id: rangeID }, 'id')
+    .then(mountain => {
+      response.status(201).json( `Success! The mountain has been added.` )
+    })
+    .catch(error => {
+      response.status(500).json({ error })
     })
 })
 
