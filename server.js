@@ -17,22 +17,22 @@ app.get('/api/v1/ranges', (request, response) => {
     });
 });
 
-app.get("/api/v1/ranges/:id", (req, res) => {
+app.get("/api/v1/ranges/:id", (request, response) => {
   database("ranges")
-    .where("id", req.params.id)
+    .where("id", request.params.id)
     .select()
     .then(range => {
-      res.status(200).json(range);
+      response.status(200).json(range);
       if (range) {
-        res.status(200).json(range);
+        response.status(200).json(range);
       } else {
-        res.status(404).json({
+        response.status(404).json({
           error: `That range does not exist.`
         });
       }
     })
     .catch(error => {
-      res.status(500).json({ error });
+      response.status(500).json({ error });
     });
 });
 
@@ -52,24 +52,44 @@ app.get('/api/v1/ranges/:id/mountains', (request, response) => {
     })
 })
 
-app.get("/api/v1/mountains/:id", (req, res) => {
+app.get("/api/v1/mountains/:id", (request, response) => {
   database("mountains")
-    .where("id", req.params.id)
+    .where("id", request.params.id)
     .select()
     .then(mountain => {
-      res.status(200).json(mountain);
+      response.status(200).json(mountain);
       if (mountain.length) {
-        res.status(200).json(mountain);
+        response.status(200).json(mountain);
       } else {
-        res.status(404).json({
+        response.status(404).json({
           error: `That mountain does not exist`
         });
       }
     })
     .catch(error => {
-      res.status(500).json({ error });
+      response.status(500).json({ error });
     });
 });
+
+app.post('/api/v1/ranges', (request, response) => {
+  const range = request.body;
+  for (let requiredParameter of ['name', 'tallest_peaks']) {
+    if(!range[requiredParameter]) {
+      response.status(422).json({ 
+        error: `Expected format: { name: <String>, tallest_peaks: <Integer> } You're missing the ${requiredParameter}.` 
+      })
+    }
+  }
+  database('ranges')
+    .insert(range, 'id')
+    .then(range => {
+      response.status(201).json({ 
+        id: range[0], message: "Success! The range has been added." })
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    })
+})
 
 app.listen(app.get('port'), () => {
   console.log(`App is now running at http://localhost:${app.get('port')}`);
