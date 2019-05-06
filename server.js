@@ -36,6 +36,21 @@ app.get("/api/v1/ranges/:id", (req, res) => {
     });
 });
 
+app.get('/api/v1/ranges/:id/mountains', (request, response) => {
+  database('mountains').where('range_id', request.params.id).select()
+    .then(mountains => {
+      if (mountains) {
+        response.status(200).json(mountains)
+      } else {
+        response.status(404).json({
+          error: `That mountain does not exist`
+        })
+      }
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+})
 
 app.listen(app.get('port'), () => {
   console.log(`App is now running at http://localhost:${app.get('port')}`);
