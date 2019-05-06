@@ -43,7 +43,7 @@ app.get('/api/v1/ranges/:id/mountains', (request, response) => {
         response.status(200).json(mountains)
       } else {
         response.status(404).json({
-          error: `That mountain does not exist`
+          error: `Could not find any mountains for that range`
         })
       }
     })
@@ -51,6 +51,25 @@ app.get('/api/v1/ranges/:id/mountains', (request, response) => {
       response.status(500).json({ error })
     })
 })
+
+app.get("/api/v1/mountains/:id", (req, res) => {
+  database("mountains")
+    .where("id", req.params.id)
+    .select()
+    .then(mountain => {
+      res.status(200).json(mountain);
+      if (mountain.length) {
+        res.status(200).json(mountain);
+      } else {
+        res.status(404).json({
+          error: `That mountain does not exist`
+        });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ error });
+    });
+});
 
 app.listen(app.get('port'), () => {
   console.log(`App is now running at http://localhost:${app.get('port')}`);
