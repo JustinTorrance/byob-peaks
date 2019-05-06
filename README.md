@@ -151,10 +151,10 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
     "message": "Range was successfully deleted."
  ```
 
-##Author:
+## Author:
 Justin Torrance
 
-##Tech Stack:
+## Tech Stack:
  - knex
  - Express
  - PostgreSQL
