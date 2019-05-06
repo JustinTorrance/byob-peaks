@@ -89,8 +89,6 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
 ]
  ``` 
  
-   
-   
  
  **Get mountain by ID:** `GET /api/v1/mountains/:id`
  - Response status: 200
@@ -108,8 +106,6 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
   }
  ```  
    
-   
- 
   **Add new range:** `POST /api/v1/ranges`
   
   **Parameters:**
@@ -123,14 +119,36 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
  - Response example:
  
  ```
-    {
-    "id": 3,
-    "name": "Mt Lucania",
-    "elevation": 17192,
-    "range_id": 1,
-    "created_at": "2019-05-03T16:12:40.338Z",
-    "updated_at": "2019-05-03T16:12:40.338Z",
-    "rank": 7
-  }
+{
+    "id": 39,
+    "message": "Success! The range has been added."
+}
  ```
+ 
+  **Add new mountain:** `POST /api/v1/ranges/:id/mountains`
+  
+  **Parameters:**
+  
+| Name                 | Type          |
+| -------------        |:-------------:|
+| `name`               | `string`      |
+| `elevation`      | `number`      |
+| `rank`      | `number`      |
+  
+ - Response status: 201
+ - Response example:
+ 
+ ```
+    "message": "Success! The mountain has been added."
+ ```
+ 
+  **Delete a range:** `DELETE /api/v1/ranges/:id`
+  
+ - Response status: 204
+ - Response example:
+ 
+ ```
+    "message": "Range was successfully deleted."
+ ```
+
  
