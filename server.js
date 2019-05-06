@@ -19,10 +19,8 @@ app.get('/api/v1/ranges', (request, response) => {
 
 app.get("/api/v1/ranges/:id", (request, response) => {
   database("ranges")
-    .where("id", request.params.id)
-    .select()
+    .where("id", request.params.id).select()
     .then(range => {
-      response.status(200).json(range)
       if (range) {
         response.status(200).json(range)
       } else {
@@ -55,10 +53,8 @@ app.get('/api/v1/ranges/:id/mountains', (request, response) => {
 
 app.get("/api/v1/mountains/:id", (request, response) => {
   database("mountains")
-    .where("id", request.params.id)
-    .select()
+    .where("id", request.params.id).select()
     .then(mountain => {
-      response.status(200).json(mountain)
       if (mountain.length) {
         response.status(200).json(mountain)
       } else {
