@@ -87,8 +87,10 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
     "rank": 7
   }
 ]
- ```  
+ ``` . 
  
+   
+   
  
  **Get mountain by ID:** `GET /api/v1/mountains/:id`
  - Response status: 200
