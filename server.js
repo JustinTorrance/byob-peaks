@@ -37,7 +37,8 @@ app.get("/api/v1/ranges/:id", (request, response) => {
 })
 
 app.get('/api/v1/ranges/:id/mountains', (request, response) => {
-  database('mountains').where('range_id', request.params.id).select()
+  database('mountains')
+    .where('range_id', request.params.id).select()
     .then(mountains => {
       if (mountains) {
         response.status(200).json(mountains)
@@ -84,7 +85,8 @@ app.post('/api/v1/ranges', (request, response) => {
     .insert(range, 'id')
     .then(range => {
       response.status(201).json({ 
-        id: range[0], message: "Success! The range has been added." })
+        id: range[0], message: "Success! The range has been added." 
+      })
     })
     .catch(error => {
       response.status(500).json({ error });
@@ -97,13 +99,33 @@ app.post('/api/v1/ranges/:id/mountains', (request, response) => {
   for (let requiredParameter of ['name', 'elevation', 'rank']) {
     if(!mountain[requiredParameter]){
       response.status(422).json({ 
-        error: `Expected format: { name: <String>, elevation: <Integer>, rank: <Integer> } You're missing the ${requiredParameter}.` })
+        error: `Expected format: { name: <String>, elevation: <Integer>, rank: <Integer> } You're missing the ${requiredParameter}.` 
+      })
     }
   }
   database('mountains')
     .insert({ ...mountain, range_id: rangeID }, 'id')
     .then(mountain => {
       response.status(201).json( `Success! The mountain has been added.` )
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+})
+
+app.delete('/api/v1/ranges/:id', (request, response) => {
+  const id = request.params.id
+  database('ranges')
+    .where('id', id).del()
+    .then(range => {
+      if (range) {
+        response.status(204).json({ 
+          message: `Range was successfully deleted.`})
+      } else {
+        response.status(404).json({ 
+          error: `This range does not exist`
+        })
+      }
     })
     .catch(error => {
       response.status(500).json({ error })
