@@ -1,7 +1,7 @@
 # Build Your Own Backend - Tallest 25 Peaks in North America
 A RESTful api that contains data on the 25 tallest mountains in North America and their respective ranges.  
 
-Live site: ranges-mountains.herokuapp.com
+Deployed to Heroku: http://ranges-mountains.herokuapp.com
 
 Original project: http://frontend.turing.io/projects/build-your-own-backend.html
 
