@@ -13,7 +13,7 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
 Response:
  
  ```
-Status: 200 ok
+Status: 200 OK
  
  [
     {
@@ -42,10 +42,12 @@ Status: 200 ok
  
  
  ## Get range by ID 
- `GET /api/v1/ranges/:id`
+ `GET /api/v1/ranges/:id`  
+ 
+ Response:
 
  ```
- Status: 200 ok
+ Status: 200 OK
  
     {
         "id": 34,
@@ -57,11 +59,14 @@ Status: 200 ok
  ```  
  
  
-**Get all mountains of a specific range:** `GET /api/v1/ranges/:id/mountains`
- - Response status: 200
- - Response example:
+## Get all mountains of a specific range
+`GET /api/v1/ranges/:id/mountains`
+
+Response:
  
  ```
+ Status: 200 OK
+ 
 [
   {
     "id": 1,
@@ -94,11 +99,14 @@ Status: 200 ok
  ``` 
  
  
- **Get mountain by ID:** `GET /api/v1/mountains/:id`
- - Response status: 200
- - Response example:
+ ## Get mountain by ID
+ `GET /api/v1/mountains/:id`   
+ 
+Response:
  
  ```
+ Status: 200 OK
+ 
     {
     "id": 3,
     "name": "Mt Lucania",
@@ -110,7 +118,8 @@ Status: 200 ok
   }
  ```  
    
-  **Add new range:** `POST /api/v1/ranges`
+  ## Add new range
+  `POST /api/v1/ranges`
   
   **Parameters:**
   
@@ -119,40 +128,45 @@ Status: 200 ok
 | `name`               | `string`      |
 | `tallest_peaks`      | `number`      |
   
- - Response status: 201
- - Response example:
+Response:
  
  ```
+ Status: 201 Created
+ 
 {
     "id": 39,
     "message": "Success! The range has been added."
 }
  ```
  
-  **Add new mountain:** `POST /api/v1/ranges/:id/mountains`
+ ## Add new mountain 
+ `POST /api/v1/ranges/:id/mountains`
   
   **Parameters:**
   
 | Name                 | Type          |
 | -------------        |:-------------:|
 | `name`               | `string`      |
-| `elevation`      | `number`      |
-| `rank`      | `number`      |
+| `elevation`          | `number`      |
+| `rank`               | `number`      |
+
   
- - Response status: 201
- - Response example:
- 
+Response:
  ```
-    "message": "Success! The mountain has been added."
+ Status: 201 Created
+ 
+ "message": "Success! The mountain has been added."
  ```
  
-  **Delete a range:** `DELETE /api/v1/ranges/:id`
+## Delete a range 
+`DELETE /api/v1/ranges/:id`
   
- - Response status: 204
- - Response example:
+ Response:
  
  ```
-    "message": "Range was successfully deleted."
+ Status: 204 No Content
+ 
+ "message": "Range was successfully deleted."
  ```
 
 ## Author:
