@@ -5,15 +5,15 @@ Deployed to Heroku: http://ranges-mountains.herokuapp.com
 
 Original project: http://frontend.turing.io/projects/build-your-own-backend.html
 
-# Endpoints  
+# Endpoints:  
 
-## Get all ranges: 
+## Get all ranges 
 `GET /api/v1/ranges`
 
- - Response:
+Response:
  
  ```
- Response status: 200  
+Status: 200 ok
  
  [
     {
@@ -41,11 +41,12 @@ Original project: http://frontend.turing.io/projects/build-your-own-backend.html
  ```  
  
  
- **Get range by ID:** `GET /api/v1/ranges/:id`
- - Response status: 200
- - Response example:
- 
+ ## Get range by ID 
+ `GET /api/v1/ranges/:id`
+
  ```
+ Status: 200 ok
+ 
     {
         "id": 34,
         "name": "Sawatch Range",
