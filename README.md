@@ -5,13 +5,16 @@ Deployed to Heroku: http://ranges-mountains.herokuapp.com
 
 Original project: http://frontend.turing.io/projects/build-your-own-backend.html
 
-## Endpoints  
+# Endpoints  
 
-**Get all ranges:** `GET /api/v1/ranges`
- - Response status: 200
- - Response example:
+## Get all ranges: 
+`GET /api/v1/ranges`
+
+ - Response:
  
  ```
+ Response status: 200  
+ 
  [
     {
         "id": 32,
